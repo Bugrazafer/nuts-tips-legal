@@ -3,57 +3,211 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nuts Tips — Destek & Yasal</title>
+<meta name="theme-color" content="#08090b">
+<meta name="description" content="Nuts Tips — futbol maçları için günlük seçimler, olasılıklar ve maç analizleri.">
+<meta property="og:title" content="Nuts Tips">
+<meta property="og:description" content="Günlük seçimler, olasılıklar ve maç analizleri — tek yerde.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nutstips.com/">
+<meta name="apple-itunes-app" content="app-id=6781012939, app-argument=https://nutstips.com/open">
+<title>Nuts Tips — Futbol Analizi</title>
 <style>
-  :root { --bg:#0a0a0c; --card:#16130f; --border:#2a2418; --gold:#C9A24E; --text:#e5e7eb; --muted:#9ca3af; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; line-height:1.6; }
-  .wrap { max-width:720px; margin:0 auto; padding:48px 20px; }
-  .brand { font-size:28px; font-weight:800; letter-spacing:-0.5px; margin-bottom:4px; }
-  .brand span { color:var(--gold); }
-  .tag { color:var(--muted); font-size:14px; margin-bottom:36px; }
-  .card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:22px; margin-bottom:16px; }
-  .card h2 { margin:0 0 8px; font-size:17px; }
-  .card p { margin:0 0 14px; color:var(--muted); font-size:14px; }
-  a.btn { display:inline-block; color:var(--gold); text-decoration:none; font-weight:600; font-size:14px; border:1px solid var(--gold); border-radius:10px; padding:8px 16px; }
-  a.mail { color:var(--gold); text-decoration:none; font-weight:600; }
-  .foot { color:#4b5563; font-size:12px; text-align:center; margin-top:32px; }
+:root{
+  --bg:#08090b;--surface:#101216;--surface2:#15181d;--border:#252a31;
+  --text:#f5f7fa;--muted:#9aa3ae;--accent:#d5b45b;--accent2:#f1d98e;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+    radial-gradient(900px 420px at 50% -120px,rgba(213,180,91,.16),transparent 70%),
+    var(--bg);
+  color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.wrap{width:min(1100px,calc(100% - 36px));margin:0 auto}
+nav{height:72px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:850;font-size:21px;letter-spacing:-.55px;text-decoration:none}
+.brand span{color:var(--accent)}
+.lang{
+  border:1px solid var(--border);background:rgba(16,18,22,.78);color:var(--muted);
+  border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer
+}
+.hero{padding:76px 0 58px;text-align:center}
+.kicker{
+  display:inline-flex;gap:7px;align-items:center;border:1px solid #332f25;
+  background:rgba(213,180,91,.07);color:var(--accent2);padding:7px 11px;border-radius:999px;
+  font-size:12px;font-weight:700;margin-bottom:22px
+}
+h1{font-size:clamp(42px,8vw,76px);line-height:1.01;letter-spacing:-3.4px;margin:0 auto 22px;max-width:850px}
+.lead{max-width:650px;margin:0 auto;color:var(--muted);font-size:clamp(17px,2.4vw,21px);line-height:1.55}
+.ctas{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:32px}
+.cta{
+  display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 20px;
+  border-radius:13px;text-decoration:none;font-weight:800;font-size:14px
+}
+.cta.primary{background:var(--text);color:#08090b}
+.cta.secondary{border:1px solid var(--border);background:var(--surface);color:#68717d;cursor:default}
+.note{margin-top:13px;color:#69727d;font-size:12px}
+.phone{
+  margin:54px auto 0;width:min(420px,88vw);padding:12px;border:1px solid var(--border);
+  border-radius:32px;background:linear-gradient(145deg,#171a20,#0f1115);
+  box-shadow:0 28px 85px rgba(0,0,0,.35)
+}
+.screen{
+  min-height:430px;border-radius:23px;background:
+    radial-gradient(420px 200px at 50% 0,rgba(213,180,91,.14),transparent 70%),
+    #0b0d10;
+  display:flex;flex-direction:column;align-items:stretch;padding:28px 22px;text-align:left
+}
+.screen-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.screen-title{font-size:19px;font-weight:850}
+.pill{font-size:10px;color:var(--accent2);border:1px solid #3a3324;border-radius:999px;padding:5px 8px}
+.match{
+  border:1px solid #20242a;background:#111419;border-radius:16px;padding:15px 16px;margin-bottom:10px
+}
+.match strong{display:block;font-size:14px;margin-bottom:5px}
+.match span{color:#87909b;font-size:12px}
+.pick{color:var(--accent2)!important;font-weight:700}
+.features{padding:60px 0 84px}
+.section-title{text-align:center;font-size:30px;letter-spacing:-1px;margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px}
+.card h2{font-size:16px;margin:0 0 9px}
+.card p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
+.final{border-top:1px solid var(--border);padding:58px 0;text-align:center}
+.final h2{font-size:30px;letter-spacing:-1px;margin:0 0 10px}
+.final p{color:var(--muted);margin:0 0 24px}
+footer{border-top:1px solid var(--border);padding:24px 0 38px;color:#747d88;font-size:12px}
+.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
+.links{display:flex;gap:15px;flex-wrap:wrap}
+.links a{text-decoration:none;color:#929ba6}
+.disclaimer{max-width:680px;line-height:1.5}
+[data-lang="en"]{display:none}
+body.en [data-lang="tr"]{display:none}
+body.en [data-lang="en"]{display:initial}
+body.en div[data-lang="en"],body.en p[data-lang="en"],body.en h1[data-lang="en"],body.en h2[data-lang="en"]{display:block}
+@media(max-width:760px){
+  .hero{padding-top:52px}
+  h1{letter-spacing:-2.2px}
+  .grid{grid-template-columns:1fr}
+  .screen{min-height:390px}
+  .footer-row{align-items:flex-start;flex-direction:column}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="brand">Nuts<span> Tips</span></div>
-  <div class="tag">Yapay zeka destekli futbol istatistik ve analiz uygulaması</div>
+  <nav>
+    <a class="brand" href="/">Nuts<span> Tips</span></a>
+    <button class="lang" id="langBtn" type="button" aria-label="Change language">EN</button>
+  </nav>
 
-  <div class="card">
-    <h2>📩 Destek / Support</h2>
-    <p>Sorularınız, geri bildirimleriniz veya hesap/veri talepleriniz için bize ulaşın:<br>
-    For questions, feedback or account/data requests, contact us:</p>
-    <a class="mail" href="mailto:bugrazaferunal@gmail.com">bugrazaferunal@gmail.com</a>
-  </div>
+  <main>
+    <section class="hero">
+      <div class="kicker">
+        <span data-lang="tr">Futbol analizini sadeleştir.</span>
+        <span data-lang="en">Football analysis, simplified.</span>
+      </div>
 
-  <div class="card">
-    <h2>🔒 Gizlilik Politikası / Privacy Policy</h2>
-    <p>Hangi verileri topladığımız ve nasıl kullandığımız.<br>What data we collect and how we use it.</p>
-    <a class="btn" href="privacy.html">Aç / Open</a>
-  </div>
+      <h1 data-lang="tr">Maça bakmadan önce bakacağın yer.</h1>
+      <h1 data-lang="en">Your matchday shortcut.</h1>
 
-  <div class="card">
-    <h2>📄 Kullanım Koşulları / Terms of Use</h2>
-    <p>Uygulamayı kullanım şartları.<br>Terms for using the app.</p>
-    <a class="btn" href="terms.html">Aç / Open</a>
-  </div>
+      <p class="lead" data-lang="tr">Günlük seçimler, olasılıklar ve maç analizleri — tek yerde.</p>
+      <p class="lead" data-lang="en">Daily picks, probabilities and match analysis — in one place.</p>
 
-  <div class="card">
-    <h2>Hesap Silme / Account Deletion</h2>
-    <p>Hesab&#305;n&#305;z&#305; ve ili&#351;kili verileri silme ad&#305;mlar&#305;.<br>Steps to delete your account and associated data.</p>
-    <a class="btn" href="delete-account.html">A&#231; / Open</a>
-  </div>
+      <div class="ctas">
+        <a class="cta primary" href="https://apps.apple.com/app/id6781012939" rel="noopener">
+          <span data-lang="tr">App Store’dan indir</span>
+          <span data-lang="en">Download on the App Store</span>
+        </a>
+        <span class="cta secondary">
+          <span data-lang="tr">Google Play — Yakında</span>
+          <span data-lang="en">Google Play — Coming soon</span>
+        </span>
+      </div>
+      <div class="note" data-lang="tr">iPhone’da kullanılabilir. Android sürümü hazırlanıyor.</div>
+      <div class="note" data-lang="en">Available on iPhone. Android is on the way.</div>
 
-  <div class="foot">
-    Nuts Tips yalnızca bilgilendirme amaçlı bir analiz uygulamasıdır. Bahis oynatmaz, bahis almaz.<br>
-    Nuts Tips is an informational analytics app only. It does not accept or facilitate wagers.
-  </div>
+      <div class="phone" aria-hidden="true">
+        <div class="screen">
+          <div class="screen-top">
+            <div class="screen-title">Nuts Tips</div>
+            <div class="pill">TODAY</div>
+          </div>
+          <div class="match"><strong>USA — Peru</strong><span class="pick">Günün seçimi</span></div>
+          <div class="match"><strong>Southend United — Barrow AFC</strong><span>Olasılıklar · maç analizi</span></div>
+          <div class="match"><strong>Cambridge United — AFC Wimbledon</strong><span>İstatistikler · içgörüler</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2 class="section-title" data-lang="tr">Daha hızlı bak. Daha net karar ver.</h2>
+      <h2 class="section-title" data-lang="en">See more. Decide faster.</h2>
+      <div class="grid">
+        <article class="card">
+          <h2 data-lang="tr">Günlük seçimler</h2><h2 data-lang="en">Daily picks</h2>
+          <p data-lang="tr">Günün öne çıkan maçlarını ve seçimlerini tek ekranda gör.</p>
+          <p data-lang="en">See the day’s highlighted matches and picks in one place.</p>
+        </article>
+        <article class="card">
+          <h2 data-lang="tr">Olasılıklar</h2><h2 data-lang="en">Probabilities</h2>
+          <p data-lang="tr">Tahminleri yalnızca sonuç olarak değil, olasılık ve verilerle birlikte değerlendir.</p>
+          <p data-lang="en">Evaluate predictions with probabilities and supporting data.</p>
+        </article>
+        <article class="card">
+          <h2 data-lang="tr">Maç analizi</h2><h2 data-lang="en">Match analysis</h2>
+          <p data-lang="tr">Takımlar, form ve maç içgörüleri arasında kaybolmadan ihtiyacın olanı bul.</p>
+          <p data-lang="en">Find the team, form and match insights that matter without the clutter.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="final">
+      <h2 data-lang="tr">Nuts Tips’i aç.</h2>
+      <h2 data-lang="en">Open Nuts Tips.</h2>
+      <p data-lang="tr">İlk bakıştan maç detayına kadar tek uygulamada.</p>
+      <p data-lang="en">From the first look to the full match detail, in one app.</p>
+      <a class="cta primary" href="/open">
+        <span data-lang="tr">Nuts Tips’i Aç</span>
+        <span data-lang="en">Open Nuts Tips</span>
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-row">
+      <div class="disclaimer">
+        <span data-lang="tr">Nuts Tips yalnızca eğlence ve bilgilendirme amaçlı istatistiksel analiz sunar. Bahis oynatmaz veya bahis kabul etmez. 18+</span>
+        <span data-lang="en">Nuts Tips provides statistical analysis for entertainment and informational purposes only. It does not accept or facilitate wagers. 18+</span>
+      </div>
+      <div class="links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="/delete-account.html">Delete account</a>
+        <a href="mailto:bugrazaferunal@gmail.com">Support</a>
+        <a href="https://www.instagram.com/nutstipsapp/" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
 </div>
+
+<script>
+(function(){
+  const button=document.getElementById('langBtn');
+  const saved=localStorage.getItem('nuts-lang');
+  const preferred=saved || (navigator.language || '').toLowerCase().startsWith('tr') ? 'tr' : 'en';
+  function setLang(lang){
+    document.body.classList.toggle('en',lang==='en');
+    document.documentElement.lang=lang;
+    button.textContent=lang==='tr'?'EN':'TR';
+    localStorage.setItem('nuts-lang',lang);
+  }
+  setLang(preferred);
+  button.addEventListener('click',()=>setLang(document.body.classList.contains('en')?'tr':'en'));
+})();
+</script>
 </body>
 </html>
