@@ -198,7 +198,7 @@ body.en div[data-lang="en"],body.en p[data-lang="en"],body.en h1[data-lang="en"]
 (function(){
   const button=document.getElementById('langBtn');
   const saved=localStorage.getItem('nuts-lang');
-  const preferred=saved || (navigator.language || '').toLowerCase().startsWith('tr') ? 'tr' : 'en';
+  const preferred=saved || ((navigator.language || '').toLowerCase().startsWith('tr') ? 'tr' : 'en');
   function setLang(lang){
     document.body.classList.toggle('en',lang==='en');
     document.documentElement.lang=lang;
