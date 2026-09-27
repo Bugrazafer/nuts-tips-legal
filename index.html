@@ -3,196 +3,556 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#08090b">
-<meta name="description" content="Nuts Tips — futbol maçları için günlük seçimler, olasılıklar ve maç analizleri.">
+<meta name="theme-color" content="#0E0F11">
+<meta name="description" content="Nuts Tips — futbol maçları için günlük seçimler, olasılıklar ve veri odaklı maç analizleri.">
 <meta property="og:title" content="Nuts Tips">
 <meta property="og:description" content="Günlük seçimler, olasılıklar ve maç analizleri — tek yerde.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nutstips.com/">
 <meta name="apple-itunes-app" content="app-id=6781012939, app-argument=https://nutstips.com/open">
 <title>Nuts Tips — Futbol Analizi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#08090b;--surface:#101216;--surface2:#15181d;--border:#252a31;
-  --text:#f5f7fa;--muted:#9aa3ae;--accent:#d5b45b;--accent2:#f1d98e;
+  --bg:#0E0F11;
+  --bg-elevated:#17191C;
+  --surface:#17191C;
+  --surface-strong:#1E2126;
+  --accent:#C9A24E;
+  --accent-soft:rgba(201,162,78,.14);
+  --text:#EEF1F5;
+  --text-secondary:#9AA3AE;
+  --text-muted:#6E7681;
+  --border:#262A30;
+  --success:#34C08A;
+  --danger:#EA7077;
+  --radius-sm:8px;
+  --radius-md:16px;
+  --radius-pill:999px;
+  --shadow:0 18px 46px rgba(0,0,0,.24);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;background:
-    radial-gradient(900px 420px at 50% -120px,rgba(213,180,91,.16),transparent 70%),
-    var(--bg);
-  color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"IBM Plex Sans",sans-serif;
   -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
+button,a{font:inherit}
 a{color:inherit}
-.wrap{width:min(1100px,calc(100% - 36px));margin:0 auto}
-nav{height:72px;display:flex;align-items:center;justify-content:space-between}
-.brand{font-weight:850;font-size:21px;letter-spacing:-.55px;text-decoration:none}
-.brand span{color:var(--accent)}
+.wrap{width:min(1160px,calc(100% - 32px));margin:0 auto}
+.site-header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(14,15,17,.92);
+  border-bottom:1px solid rgba(38,42,48,.72);
+  backdrop-filter:blur(14px);
+}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:-.35px;font-size:20px}
+.brand-mark{
+  width:31px;height:31px;border-radius:10px;
+  display:grid;place-items:center;
+  background:var(--surface-strong);
+  border:1px solid var(--border);
+  color:var(--accent);
+  font-family:"IBM Plex Mono",monospace;
+  font-size:14px;font-weight:600;
+}
+.nav-actions{display:flex;align-items:center;gap:8px}
 .lang{
-  border:1px solid var(--border);background:rgba(16,18,22,.78);color:var(--muted);
-  border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;cursor:pointer
+  height:38px;padding:0 12px;border-radius:var(--radius-sm);
+  border:1px solid var(--border);background:var(--surface);color:var(--text-secondary);
+  font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer
 }
-.hero{padding:76px 0 58px;text-align:center}
-.kicker{
-  display:inline-flex;gap:7px;align-items:center;border:1px solid #332f25;
-  background:rgba(213,180,91,.07);color:var(--accent2);padding:7px 11px;border-radius:999px;
-  font-size:12px;font-weight:700;margin-bottom:22px
+.nav-cta,.button{
+  min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:0 17px;border-radius:var(--radius-md);text-decoration:none;
+  font-weight:700;font-size:14px;border:1px solid transparent;transition:.18s ease
 }
-h1{font-size:clamp(42px,8vw,76px);line-height:1.01;letter-spacing:-3.4px;margin:0 auto 22px;max-width:850px}
-.lead{max-width:650px;margin:0 auto;color:var(--muted);font-size:clamp(17px,2.4vw,21px);line-height:1.55}
-.ctas{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:32px}
-.cta{
-  display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 20px;
-  border-radius:13px;text-decoration:none;font-weight:800;font-size:14px
+.nav-cta{min-height:38px;border-radius:10px;background:var(--accent);color:#0E0F11;padding:0 14px}
+.button.primary{background:var(--accent);color:#0E0F11}
+.button.primary:hover,.nav-cta:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.button.secondary{background:var(--surface);border-color:var(--border);color:var(--text)}
+.button.secondary:hover{border-color:#3A4049;background:var(--surface-strong)}
+.hero{padding:88px 0 72px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(420px,.92fr);gap:64px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--accent);font-size:11px;font-weight:700;letter-spacing:1.25px;
+  text-transform:uppercase;margin-bottom:18px
 }
-.cta.primary{background:var(--text);color:#08090b}
-.cta.secondary{border:1px solid var(--border);background:var(--surface);color:#68717d;cursor:default}
-.note{margin-top:13px;color:#69727d;font-size:12px}
-.phone{
-  margin:54px auto 0;width:min(420px,88vw);padding:12px;border:1px solid var(--border);
-  border-radius:32px;background:linear-gradient(145deg,#171a20,#0f1115);
-  box-shadow:0 28px 85px rgba(0,0,0,.35)
+.eyebrow::before{content:"";width:20px;height:1px;background:var(--accent)}
+h1{font-size:clamp(46px,6.6vw,72px);line-height:.99;letter-spacing:-2.8px;margin:0 0 22px;max-width:720px}
+.hero-copy{max-width:620px;color:var(--text-secondary);font-size:18px;line-height:1.62;margin:0}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.hero-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:17px;color:var(--text-muted);font-size:12px}
+.hero-meta .dot{width:3px;height:3px;border-radius:50%;background:var(--text-muted)}
+.product-panel{
+  position:relative;background:var(--surface);border:1px solid var(--border);border-radius:22px;
+  padding:18px;box-shadow:var(--shadow);overflow:hidden
 }
-.screen{
-  min-height:430px;border-radius:23px;background:
-    radial-gradient(420px 200px at 50% 0,rgba(213,180,91,.14),transparent 70%),
-    #0b0d10;
-  display:flex;flex-direction:column;align-items:stretch;padding:28px 22px;text-align:left
+.panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.panel-title{font-size:14px;font-weight:700}
+.panel-kicker{font-size:10px;color:var(--text-muted);letter-spacing:1.1px;text-transform:uppercase}
+.status-pill{
+  display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);
+  border-radius:var(--radius-pill);padding:6px 9px;color:var(--text-secondary);
+  font-size:10px;font-weight:600;letter-spacing:.7px
 }
-.screen-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
-.screen-title{font-size:19px;font-weight:850}
-.pill{font-size:10px;color:var(--accent2);border:1px solid #3a3324;border-radius:999px;padding:5px 8px}
-.match{
-  border:1px solid #20242a;background:#111419;border-radius:16px;padding:15px 16px;margin-bottom:10px
+.status-pill::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--success)}
+.preview-block{border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;background:#141619}
+.preview-heading{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:11px 13px;border-bottom:1px solid var(--border);
+  color:var(--text-secondary);font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase
 }
-.match strong{display:block;font-size:14px;margin-bottom:5px}
-.match span{color:#87909b;font-size:12px}
-.pick{color:var(--accent2)!important;font-weight:700}
-.features{padding:60px 0 84px}
-.section-title{text-align:center;font-size:30px;letter-spacing:-1px;margin:0 0 28px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px}
-.card h2{font-size:16px;margin:0 0 9px}
-.card p{font-size:13px;line-height:1.6;color:var(--muted);margin:0}
-.final{border-top:1px solid var(--border);padding:58px 0;text-align:center}
-.final h2{font-size:30px;letter-spacing:-1px;margin:0 0 10px}
-.final p{color:var(--muted);margin:0 0 24px}
-footer{border-top:1px solid var(--border);padding:24px 0 38px;color:#747d88;font-size:12px}
-.footer-row{display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap}
-.links{display:flex;gap:15px;flex-wrap:wrap}
-.links a{text-decoration:none;color:#929ba6}
-.disclaimer{max-width:680px;line-height:1.5}
+.match-row{
+  display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:12px;align-items:center;
+  padding:13px;border-bottom:1px solid var(--surface-strong)
+}
+.match-row:last-child{border-bottom:0}
+.match-time{font-family:"IBM Plex Mono",monospace;color:var(--text-secondary);font-size:12px}
+.match-teams{min-width:0}
+.match-teams strong{display:block;font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.match-teams span{display:block;margin-top:3px;color:var(--text-muted);font-size:10px}
+.confidence{text-align:right}
+.confidence b{display:block;color:var(--accent);font-family:"IBM Plex Mono",monospace;font-size:15px;font-weight:600}
+.confidence span{display:block;color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:.7px;margin-top:2px}
+.signal-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:12px;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden}
+.signal{background:var(--surface-strong);padding:12px}
+.signal span{display:block;color:var(--text-muted);font-size:9px;text-transform:uppercase;letter-spacing:.8px}
+.signal strong{display:block;margin-top:5px;font-family:"IBM Plex Mono",monospace;font-size:14px}
+.signal strong.gold{color:var(--accent)}
+.section{padding:78px 0}
+.section + .section{border-top:1px solid rgba(38,42,48,.72)}
+.section-head{display:flex;justify-content:space-between;gap:28px;align-items:flex-end;margin-bottom:28px}
+.section-label{color:var(--accent);font-size:11px;font-weight:700;letter-spacing:1.15px;text-transform:uppercase;margin-bottom:9px}
+.section-title{font-size:clamp(30px,4vw,44px);line-height:1.08;letter-spacing:-1.5px;margin:0}
+.section-copy{max-width:470px;color:var(--text-secondary);font-size:14px;line-height:1.65;margin:0}
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.value-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);
+  padding:18px;min-height:278px;display:flex;flex-direction:column
+}
+.card-index{font-family:"IBM Plex Mono",monospace;color:var(--text-muted);font-size:10px;margin-bottom:18px}
+.value-card h3{font-size:18px;margin:0 0 7px}
+.value-card p{color:var(--text-secondary);font-size:13px;line-height:1.55;margin:0 0 20px}
+.mini-ui{margin-top:auto;border-top:1px solid var(--border);padding-top:14px}
+.mini-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:8px 0;border-bottom:1px solid var(--surface-strong);font-size:12px}
+.mini-row:last-child{border-bottom:0}
+.mini-row span{color:var(--text-secondary)}
+.mini-row b{font-family:"IBM Plex Mono",monospace;font-size:12px}
+.mini-row b.gold{color:var(--accent)}
+.prob-bars{display:grid;gap:10px}
+.prob-line{display:grid;grid-template-columns:45px 1fr 42px;align-items:center;gap:9px}
+.prob-line label{font-size:10px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.5px}
+.bar{height:5px;background:#24272C;border-radius:var(--radius-pill);overflow:hidden}
+.bar > i{display:block;height:100%;background:var(--accent);border-radius:inherit}
+.prob-line b{font-family:"IBM Plex Mono",monospace;font-size:11px;text-align:right}
+.builder-chip-row{display:flex;gap:7px;flex-wrap:wrap}
+.builder-chip{padding:7px 9px;border:1px solid var(--border);border-radius:8px;background:var(--surface-strong);font-size:10px;color:var(--text-secondary)}
+.builder-chip.active{border-color:rgba(201,162,78,.45);color:var(--accent)}
+.analysis-shell{background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+.analysis-hero{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:28px;
+  padding:28px;border-bottom:1px solid var(--border)
+}
+.team{text-align:center}
+.crest{
+  width:48px;height:48px;margin:0 auto 10px;border-radius:16px;
+  display:grid;place-items:center;background:var(--surface-strong);border:1px solid var(--border);
+  font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--text-secondary)
+}
+.team strong{display:block;font-size:14px}
+.match-center{text-align:center;min-width:150px}
+.league-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.kickoff{font-family:"IBM Plex Mono",monospace;font-size:24px;font-weight:600;margin:8px 0 4px}
+.prediction{font-size:11px;color:var(--accent);font-weight:600}
+.tabs{display:flex;gap:24px;padding:0 22px;border-bottom:1px solid var(--border);overflow:auto}
+.tab{position:relative;padding:14px 0;color:var(--text-secondary);font-size:12px;font-weight:600;white-space:nowrap}
+.tab.active{color:var(--text)}
+.tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--accent)}
+.analysis-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:1px;background:var(--border)}
+.analysis-card{background:var(--surface);padding:20px}
+.small-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.9px}
+.big-number{font-family:"IBM Plex Mono",monospace;font-size:34px;font-weight:600;margin-top:7px}
+.big-number.gold{color:var(--accent)}
+.data-table{margin-top:15px}
+.data-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--surface-strong);font-size:12px}
+.data-row:last-child{border-bottom:0}
+.data-row span{color:var(--text-secondary)}
+.data-row b{font-family:"IBM Plex Mono",monospace}
+.pro-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:18px;align-items:center}
+.pro-copy h2{font-size:clamp(32px,4.4vw,48px);letter-spacing:-1.6px;line-height:1.05;margin:0 0 16px}
+.pro-copy p{color:var(--text-secondary);font-size:15px;line-height:1.65;max-width:500px;margin:0}
+.benefits{display:grid;gap:9px;margin-top:22px}
+.benefit{display:flex;align-items:center;gap:10px;color:var(--text-secondary);font-size:13px}
+.check{
+  width:19px;height:19px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(52,192,138,.11);color:var(--success);font-size:11px;border:1px solid rgba(52,192,138,.2)
+}
+.lock-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px;overflow:hidden}
+.pro-badge{display:inline-flex;border:1px solid rgba(201,162,78,.38);background:var(--accent-soft);color:var(--accent);border-radius:8px;padding:6px 8px;font-size:9px;font-weight:700;letter-spacing:.8px}
+.lock-content{margin-top:14px;filter:blur(1.8px);opacity:.48;pointer-events:none}
+.lock-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}
+.lock-row:last-child{border-bottom:0}
+.lock-row span{font-size:12px}
+.lock-row b{font-family:"IBM Plex Mono",monospace;color:var(--accent)}
+.lock-overlay{
+  position:absolute;inset:0;display:grid;place-items:center;text-align:center;
+  background:linear-gradient(to bottom,rgba(23,25,28,.12),rgba(23,25,28,.82))
+}
+.lock-box{width:190px;padding:15px;border:1px solid var(--border);border-radius:var(--radius-md);background:rgba(30,33,38,.92);box-shadow:0 10px 30px rgba(0,0,0,.22)}
+.lock-icon{font-size:18px;color:var(--accent);margin-bottom:6px}
+.lock-box strong{display:block;font-size:13px}
+.lock-box span{display:block;color:var(--text-muted);font-size:10px;margin-top:4px}
+.final-cta{text-align:center;padding:86px 0}
+.final-cta h2{font-size:clamp(34px,5vw,54px);letter-spacing:-1.8px;margin:0 0 12px}
+.final-cta p{color:var(--text-secondary);margin:0 auto 24px;max-width:520px;font-size:15px;line-height:1.6}
+footer{border-top:1px solid var(--border);padding:28px 0 38px;color:var(--text-muted);font-size:11px}
+.footer-row{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.disclaimer{max-width:660px;line-height:1.55}
+.links{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-end}
+.links a{color:var(--text-secondary);text-decoration:none}
+.links a:hover{color:var(--text)}
 [data-lang="en"]{display:none}
 body.en [data-lang="tr"]{display:none}
 body.en [data-lang="en"]{display:initial}
-body.en div[data-lang="en"],body.en p[data-lang="en"],body.en h1[data-lang="en"],body.en h2[data-lang="en"]{display:block}
-@media(max-width:760px){
-  .hero{padding-top:52px}
-  h1{letter-spacing:-2.2px}
-  .grid{grid-template-columns:1fr}
-  .screen{min-height:390px}
-  .footer-row{align-items:flex-start;flex-direction:column}
+body.en div[data-lang="en"],body.en p[data-lang="en"],body.en h1[data-lang="en"],body.en h2[data-lang="en"],body.en h3[data-lang="en"],body.en span[data-lang="en"]{display:block}
+body.en a span[data-lang="en"],body.en button span[data-lang="en"]{display:inline}
+@media(max-width:930px){
+  .hero{padding-top:64px}
+  .hero-grid{grid-template-columns:1fr;gap:38px}
+  .product-panel{max-width:620px}
+  .value-grid{grid-template-columns:1fr 1fr}
+  .value-card:last-child{grid-column:1/-1}
+  .section-head{align-items:flex-start;flex-direction:column}
+  .pro-layout{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .wrap{width:min(100% - 32px,1160px)}
+  .nav{height:62px}
+  .nav-cta{display:none}
+  .hero{padding:54px 0 54px}
+  h1{font-size:46px;letter-spacing:-2px}
+  .hero-copy{font-size:16px}
+  .hero-actions{display:grid;grid-template-columns:1fr}
+  .button{width:100%}
+  .product-panel{padding:13px;border-radius:18px}
+  .match-row{grid-template-columns:52px minmax(0,1fr) auto;gap:8px;padding:12px 10px}
+  .signal{padding:10px 8px}
+  .signal strong{font-size:12px}
+  .section{padding:58px 0}
+  .value-grid{grid-template-columns:1fr}
+  .value-card:last-child{grid-column:auto}
+  .analysis-hero{gap:12px;padding:22px 12px}
+  .crest{width:42px;height:42px}
+  .match-center{min-width:104px}
+  .kickoff{font-size:19px}
+  .analysis-grid{grid-template-columns:1fr}
+  .tabs{gap:20px}
+  .footer-row{flex-direction:column}
+  .links{justify-content:flex-start}
+}
+@media(max-width:390px){
+  h1{font-size:41px}
+  .match-teams strong{font-size:12px}
+  .confidence b{font-size:13px}
+  .signal span{font-size:8px}
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <nav>
-    <a class="brand" href="/">Nuts<span> Tips</span></a>
-    <button class="lang" id="langBtn" type="button" aria-label="Change language">EN</button>
-  </nav>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="Nuts Tips home">
+      <span class="brand-mark">NT</span>
+      <span>Nuts Tips</span>
+    </a>
+    <div class="nav-actions">
+      <button class="lang" id="langBtn" type="button" aria-label="Change language">EN</button>
+      <a class="nav-cta" href="/open">
+        <span data-lang="tr">Uygulamayı Aç</span>
+        <span data-lang="en">Open App</span>
+      </a>
+    </div>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="kicker">
-        <span data-lang="tr">Futbol analizini sadeleştir.</span>
-        <span data-lang="en">Football analysis, simplified.</span>
-      </div>
-
-      <h1 data-lang="tr">Maça bakmadan önce bakacağın yer.</h1>
-      <h1 data-lang="en">Your matchday shortcut.</h1>
-
-      <p class="lead" data-lang="tr">Günlük seçimler, olasılıklar ve maç analizleri — tek yerde.</p>
-      <p class="lead" data-lang="en">Daily picks, probabilities and match analysis — in one place.</p>
-
-      <div class="ctas">
-        <a class="cta primary" href="https://apps.apple.com/app/id6781012939" rel="noopener">
-          <span data-lang="tr">App Store’dan indir</span>
-          <span data-lang="en">Download on the App Store</span>
-        </a>
-        <span class="cta secondary">
-          <span data-lang="tr">Google Play — Yakında</span>
-          <span data-lang="en">Google Play — Coming soon</span>
-        </span>
-      </div>
-      <div class="note" data-lang="tr">iPhone’da kullanılabilir. Android sürümü hazırlanıyor.</div>
-      <div class="note" data-lang="en">Available on iPhone. Android is on the way.</div>
-
-      <div class="phone" aria-hidden="true">
-        <div class="screen">
-          <div class="screen-top">
-            <div class="screen-title">Nuts Tips</div>
-            <div class="pill">TODAY</div>
-          </div>
-          <div class="match"><strong>USA — Peru</strong><span class="pick">Günün seçimi</span></div>
-          <div class="match"><strong>Southend United — Barrow AFC</strong><span>Olasılıklar · maç analizi</span></div>
-          <div class="match"><strong>Cambridge United — AFC Wimbledon</strong><span>İstatistikler · içgörüler</span></div>
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">
+          <span data-lang="tr">Futbol zekâsı</span>
+          <span data-lang="en">Football intelligence</span>
+        </div>
+        <h1 data-lang="tr">Maçı tahmin etme. Önce veriyi gör.</h1>
+        <h1 data-lang="en">Don't call the match. Read it first.</h1>
+        <p class="hero-copy" data-lang="tr">Günlük seçimleri, olasılıkları ve maç verilerini tek yerde gör. Nuts Tips, maç öncesi karmaşayı daha okunabilir bir analize çevirir.</p>
+        <p class="hero-copy" data-lang="en">See daily picks, probabilities and match data in one place. Nuts Tips turns pre-match noise into a clearer analytical view.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="/open">
+            <span data-lang="tr">Nuts Tips'i Aç →</span>
+            <span data-lang="en">Open Nuts Tips →</span>
+          </a>
+          <a class="button secondary" href="https://apps.apple.com/app/id6781012939" rel="noopener">
+            <span data-lang="tr">App Store</span>
+            <span data-lang="en">App Store</span>
+          </a>
+        </div>
+        <div class="hero-meta">
+          <span data-lang="tr">iPhone'da kullanılabilir</span>
+          <span data-lang="en">Available on iPhone</span>
+          <span class="dot"></span>
+          <span data-lang="tr">Google Play yakında</span>
+          <span data-lang="en">Google Play coming soon</span>
+          <span class="dot"></span>
+          <span>18+</span>
         </div>
       </div>
-    </section>
 
-    <section class="features">
-      <h2 class="section-title" data-lang="tr">Daha hızlı bak. Daha net karar ver.</h2>
-      <h2 class="section-title" data-lang="en">See more. Decide faster.</h2>
-      <div class="grid">
-        <article class="card">
-          <h2 data-lang="tr">Günlük seçimler</h2><h2 data-lang="en">Daily picks</h2>
-          <p data-lang="tr">Günün öne çıkan maçlarını ve seçimlerini tek ekranda gör.</p>
-          <p data-lang="en">See the day’s highlighted matches and picks in one place.</p>
-        </article>
-        <article class="card">
-          <h2 data-lang="tr">Olasılıklar</h2><h2 data-lang="en">Probabilities</h2>
-          <p data-lang="tr">Tahminleri yalnızca sonuç olarak değil, olasılık ve verilerle birlikte değerlendir.</p>
-          <p data-lang="en">Evaluate predictions with probabilities and supporting data.</p>
-        </article>
-        <article class="card">
-          <h2 data-lang="tr">Maç analizi</h2><h2 data-lang="en">Match analysis</h2>
-          <p data-lang="tr">Takımlar, form ve maç içgörüleri arasında kaybolmadan ihtiyacın olanı bul.</p>
-          <p data-lang="en">Find the team, form and match insights that matter without the clutter.</p>
-        </article>
-      </div>
-    </section>
+      <div class="product-panel" aria-label="Nuts Tips product preview">
+        <div class="panel-top">
+          <div>
+            <div class="panel-kicker" data-lang="tr">Ürün önizlemesi</div>
+            <div class="panel-kicker" data-lang="en">Product preview</div>
+            <div class="panel-title" data-lang="tr">Bugünün maçları</div>
+            <div class="panel-title" data-lang="en">Today's matches</div>
+          </div>
+          <div class="status-pill">
+            <span data-lang="tr">MODEL AKTİF</span>
+            <span data-lang="en">MODEL ACTIVE</span>
+          </div>
+        </div>
 
-    <section class="final">
-      <h2 data-lang="tr">Nuts Tips’i aç.</h2>
-      <h2 data-lang="en">Open Nuts Tips.</h2>
-      <p data-lang="tr">İlk bakıştan maç detayına kadar tek uygulamada.</p>
-      <p data-lang="en">From the first look to the full match detail, in one app.</p>
-      <a class="cta primary" href="/open">
-        <span data-lang="tr">Nuts Tips’i Aç</span>
-        <span data-lang="en">Open Nuts Tips</span>
-      </a>
-    </section>
-  </main>
+        <div class="preview-block">
+          <div class="preview-heading">
+            <span data-lang="tr">Maç / seçim</span><span data-lang="en">Match / pick</span>
+            <span data-lang="tr">Güven</span><span data-lang="en">Confidence</span>
+          </div>
+          <div class="match-row">
+            <div class="match-time">19:00</div>
+            <div class="match-teams">
+              <strong>Arsenal — Chelsea</strong>
+              <span data-lang="tr">1X · maç sonucu</span><span data-lang="en">1X · match result</span>
+            </div>
+            <div class="confidence"><b>82%</b><span>model</span></div>
+          </div>
+          <div class="match-row">
+            <div class="match-time">21:45</div>
+            <div class="match-teams">
+              <strong>Inter — Milan</strong>
+              <span data-lang="tr">2.5 Üst · gol pazarı</span><span data-lang="en">Over 2.5 · goals</span>
+            </div>
+            <div class="confidence"><b>78%</b><span>model</span></div>
+          </div>
+          <div class="match-row">
+            <div class="match-time">22:00</div>
+            <div class="match-teams">
+              <strong>Barcelona — Sevilla</strong>
+              <span data-lang="tr">Ev sahibi · sonuç</span><span data-lang="en">Home · result</span>
+            </div>
+            <div class="confidence"><b>74%</b><span>model</span></div>
+          </div>
+        </div>
 
-  <footer>
-    <div class="footer-row">
-      <div class="disclaimer">
-        <span data-lang="tr">Nuts Tips yalnızca eğlence ve bilgilendirme amaçlı istatistiksel analiz sunar. Bahis oynatmaz veya bahis kabul etmez. 18+</span>
-        <span data-lang="en">Nuts Tips provides statistical analysis for entertainment and informational purposes only. It does not accept or facilitate wagers. 18+</span>
-      </div>
-      <div class="links">
-        <a href="/privacy.html">Privacy</a>
-        <a href="/terms.html">Terms</a>
-        <a href="/delete-account.html">Delete account</a>
-        <a href="mailto:bugrazaferunal@gmail.com">Support</a>
-        <a href="https://www.instagram.com/nutstipsapp/" rel="noopener">Instagram</a>
+        <div class="signal-strip">
+          <div class="signal"><span data-lang="tr">Form</span><span data-lang="en">Form</span><strong>7/10</strong></div>
+          <div class="signal"><span data-lang="tr">Güven</span><span data-lang="en">Confidence</span><strong class="gold">82%</strong></div>
+          <div class="signal"><span data-lang="tr">Veri</span><span data-lang="en">Data</span><strong>24</strong></div>
+        </div>
       </div>
     </div>
-  </footer>
-</div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-label" data-lang="tr">Ürünün özü</div>
+          <div class="section-label" data-lang="en">Product core</div>
+          <h2 class="section-title" data-lang="tr">Bir skor tahmininden fazlası.</h2>
+          <h2 class="section-title" data-lang="en">More than a score prediction.</h2>
+        </div>
+        <p class="section-copy" data-lang="tr">Nuts Tips, karar verirken bakacağın bilgiyi maçın etrafındaki gürültüden ayırır.</p>
+        <p class="section-copy" data-lang="en">Nuts Tips separates the information that matters from the noise around a match.</p>
+      </div>
+
+      <div class="value-grid">
+        <article class="value-card">
+          <div class="card-index">01 / PICKS</div>
+          <h3 data-lang="tr">Günlük seçimler</h3><h3 data-lang="en">Daily picks</h3>
+          <p data-lang="tr">Günün öne çıkan maçlarını, seçimleri ve model güvenini tek bakışta gör.</p>
+          <p data-lang="en">See the day's highlighted matches, picks and model confidence at a glance.</p>
+          <div class="mini-ui">
+            <div class="mini-row"><span>Arsenal — Chelsea</span><b class="gold">82%</b></div>
+            <div class="mini-row"><span>Inter — Milan</span><b class="gold">78%</b></div>
+            <div class="mini-row"><span>Barcelona — Sevilla</span><b>74%</b></div>
+          </div>
+        </article>
+
+        <article class="value-card">
+          <div class="card-index">02 / PROBABILITY</div>
+          <h3 data-lang="tr">Olasılık & analiz</h3><h3 data-lang="en">Probability & analysis</h3>
+          <p data-lang="tr">Tahmini tek sonuç olarak değil, olasılık dağılımı ve maç bağlamıyla değerlendir.</p>
+          <p data-lang="en">Read a prediction as a probability distribution with match context, not a single outcome.</p>
+          <div class="mini-ui prob-bars">
+            <div class="prob-line"><label data-lang="tr">Ev</label><label data-lang="en">Home</label><div class="bar"><i style="width:54%"></i></div><b>54%</b></div>
+            <div class="prob-line"><label data-lang="tr">Ber.</label><label data-lang="en">Draw</label><div class="bar"><i style="width:27%;opacity:.72"></i></div><b>27%</b></div>
+            <div class="prob-line"><label data-lang="tr">Dep.</label><label data-lang="en">Away</label><div class="bar"><i style="width:19%;opacity:.48"></i></div><b>19%</b></div>
+          </div>
+        </article>
+
+        <article class="value-card">
+          <div class="card-index">03 / PRO TOOLS</div>
+          <h3 data-lang="tr">Bankers & Bet Builder</h3><h3 data-lang="en">Bankers & Bet Builder</h3>
+          <p data-lang="tr">Yüksek güvenli seçimleri filtrele; kendi koşullarınla veri odaklı kombinasyonlar kur.</p>
+          <p data-lang="en">Filter higher-confidence picks and build data-driven combinations around your own criteria.</p>
+          <div class="mini-ui">
+            <div class="builder-chip-row">
+              <span class="builder-chip active">80%+</span>
+              <span class="builder-chip">1X2</span>
+              <span class="builder-chip">Goals</span>
+              <span class="builder-chip active">Form</span>
+            </div>
+            <div class="mini-row" style="margin-top:8px"><span data-lang="tr">Seçili bacak</span><span data-lang="en">Selected leg</span><b class="gold">2</b></div>
+            <div class="mini-row"><span data-lang="tr">Model filtresi</span><span data-lang="en">Model filter</span><b>ON</b></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="section-label" data-lang="tr">Maç detayı</div>
+          <div class="section-label" data-lang="en">Match detail</div>
+          <h2 class="section-title" data-lang="tr">Veriyi blok blok değil, bağlamıyla oku.</h2>
+          <h2 class="section-title" data-lang="en">Read the data in context, not in fragments.</h2>
+        </div>
+        <p class="section-copy" data-lang="tr">Tahmin, form, istatistik ve maç bağlamı aynı görsel hiyerarşide buluşur.</p>
+        <p class="section-copy" data-lang="en">Prediction, form, statistics and match context live in the same visual hierarchy.</p>
+      </div>
+
+      <div class="analysis-shell">
+        <div class="analysis-hero">
+          <div class="team">
+            <div class="crest">ARS</div>
+            <strong>Arsenal</strong>
+          </div>
+          <div class="match-center">
+            <div class="league-label">PREMIER LEAGUE</div>
+            <div class="kickoff">19:00</div>
+            <div class="prediction" data-lang="tr">Model: 1X · %82 güven</div>
+            <div class="prediction" data-lang="en">Model: 1X · 82% confidence</div>
+          </div>
+          <div class="team">
+            <div class="crest">CHE</div>
+            <strong>Chelsea</strong>
+          </div>
+        </div>
+        <div class="tabs">
+          <div class="tab active" data-lang="tr">Tahmin</div><div class="tab active" data-lang="en">Prediction</div>
+          <div class="tab" data-lang="tr">İstatistik</div><div class="tab" data-lang="en">Statistics</div>
+          <div class="tab" data-lang="tr">Form</div><div class="tab" data-lang="en">Form</div>
+          <div class="tab" data-lang="tr">Puan Durumu</div><div class="tab" data-lang="en">Standings</div>
+        </div>
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <div class="small-label" data-lang="tr">Ana tahmin</div><div class="small-label" data-lang="en">Primary prediction</div>
+            <div class="big-number gold">82%</div>
+            <div class="data-table">
+              <div class="data-row"><span data-lang="tr">Ev sahibi kaybetmez</span><span data-lang="en">Home avoids defeat</span><b>1X</b></div>
+              <div class="data-row"><span data-lang="tr">Model güveni</span><span data-lang="en">Model confidence</span><b>82%</b></div>
+              <div class="data-row"><span data-lang="tr">Form sinyali</span><span data-lang="en">Form signal</span><b>7/10</b></div>
+            </div>
+          </div>
+          <div class="analysis-card">
+            <div class="small-label" data-lang="tr">Sonuç olasılığı</div><div class="small-label" data-lang="en">Result probability</div>
+            <div class="data-table">
+              <div class="data-row"><span data-lang="tr">Ev sahibi</span><span data-lang="en">Home</span><b>54%</b></div>
+              <div class="data-row"><span data-lang="tr">Beraberlik</span><span data-lang="en">Draw</span><b>27%</b></div>
+              <div class="data-row"><span data-lang="tr">Deplasman</span><span data-lang="en">Away</span><b>19%</b></div>
+              <div class="data-row"><span data-lang="tr">Veri noktası</span><span data-lang="en">Data points</span><b>24</b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap pro-layout">
+      <div class="pro-copy">
+        <div class="section-label">NUTS TIPS PRO</div>
+        <h2 data-lang="tr">Daha fazla veri. Aynı sade dil.</h2>
+        <h2 data-lang="en">More data. Same clear language.</h2>
+        <p data-lang="tr">Pro, ürünü daha parlak yapmaz; daha derine açar. Yüksek güvenli seçimler, genişletilmiş analiz ve gelişmiş araçlar kontrollü bir premium katmanda açılır.</p>
+        <p data-lang="en">Pro does not make the product louder; it opens it deeper. Higher-confidence picks, expanded analysis and advanced tools unlock in a restrained premium layer.</p>
+        <div class="benefits">
+          <div class="benefit"><span class="check">✓</span><span data-lang="tr">%80+ yüksek güvenli seçimler</span><span data-lang="en">80%+ higher-confidence picks</span></div>
+          <div class="benefit"><span class="check">✓</span><span data-lang="tr">Genişletilmiş maç analizi</span><span data-lang="en">Expanded match analysis</span></div>
+          <div class="benefit"><span class="check">✓</span><span data-lang="tr">Bankers ve Bet Builder araçları</span><span data-lang="en">Bankers and Bet Builder tools</span></div>
+        </div>
+      </div>
+
+      <div class="lock-card">
+        <span class="pro-badge">PRO PREVIEW</span>
+        <div class="lock-content">
+          <div class="lock-row"><span>Arsenal — Chelsea</span><b>86%</b></div>
+          <div class="lock-row"><span>Inter — Milan</span><b>84%</b></div>
+          <div class="lock-row"><span>Barcelona — Sevilla</span><b>81%</b></div>
+          <div class="lock-row"><span>PSG — Marseille</span><b>80%</b></div>
+        </div>
+        <div class="lock-overlay">
+          <div class="lock-box">
+            <div class="lock-icon">◆</div>
+            <strong data-lang="tr">Pro içerik</strong><strong data-lang="en">Pro content</strong>
+            <span data-lang="tr">Daha yüksek güven eşiği ve detaylı analiz</span>
+            <span data-lang="en">Higher confidence threshold and deeper analysis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="wrap">
+      <h2 data-lang="tr">Maçtan önce bakacağın yer.</h2>
+      <h2 data-lang="en">Your pre-match read.</h2>
+      <p data-lang="tr">Günlük seçimlerden maç detayına kadar Nuts Tips'i tek dokunuşla aç.</p>
+      <p data-lang="en">From daily picks to full match detail, open Nuts Tips in one tap.</p>
+      <a class="button primary" href="/open">
+        <span data-lang="tr">Nuts Tips'i Aç →</span>
+        <span data-lang="en">Open Nuts Tips →</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="disclaimer">
+      <span data-lang="tr">Nuts Tips yalnızca eğlence ve bilgilendirme amaçlı istatistiksel analiz sunar. Bahis oynatmaz veya bahis kabul etmez. 18+</span>
+      <span data-lang="en">Nuts Tips provides statistical analysis for entertainment and informational purposes only. It does not accept or facilitate wagers. 18+</span>
+    </div>
+    <div class="links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/delete-account.html">Delete account</a>
+      <a href="mailto:bugrazaferunal@gmail.com">Support</a>
+      <a href="https://www.instagram.com/nutstipsapp/" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</footer>
 
 <script>
 (function(){
@@ -206,7 +566,7 @@ body.en div[data-lang="en"],body.en p[data-lang="en"],body.en h1[data-lang="en"]
     localStorage.setItem('nuts-lang',lang);
   }
   setLang(preferred);
-  button.addEventListener('click',()=>setLang(document.body.classList.contains('en')?'tr':'en'));
+  button.addEventListener('click',function(){ setLang(document.body.classList.contains('en')?'tr':'en'); });
 })();
 </script>
 </body>
