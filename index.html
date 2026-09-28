@@ -591,18 +591,15 @@ body.en a span[data-lang="en"],body.en button span[data-lang="en"]{display:inlin
   const src=ALLOWED_SRC.has(rawSrc)?rawSrc:'direct';
   const route=ALLOWED_ROUTE.has(rawRoute)?rawRoute:'direct';
 
-  function sessionId(){
-    const key='nuts-acq-session';
-    let value=sessionStorage.getItem(key);
-    if(value) return value;
-    value=(window.crypto&&crypto.randomUUID)
+  function newSessionId(){
+    return (window.crypto&&crypto.randomUUID)
       ? crypto.randomUUID()
       : ('s-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));
-    sessionStorage.setItem(key,value);
-    return value;
   }
 
-  const sid=sessionId();
+  // In-app browsers can restrict sessionStorage. Keep the acquisition session
+  // in memory and carry it forward in /open instead of depending on storage.
+  const sid=newSessionId();
 
   function track(eventType,store){
     const body={
@@ -625,11 +622,7 @@ body.en a span[data-lang="en"],body.en button span[data-lang="en"]{display:inlin
     }).catch(function(){});
   }
 
-  const viewKey='nuts-view:'+window.location.pathname+':'+src+':'+route;
-  if(!sessionStorage.getItem(viewKey)){
-    sessionStorage.setItem(viewKey,'1');
-    track('landing_view');
-  }
+  track('landing_view');
 
   // Internal app-open links keep source context for the next hop.
   document.querySelectorAll('a[href^="/open"]').forEach(function(a){
