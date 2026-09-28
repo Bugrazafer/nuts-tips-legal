@@ -576,9 +576,18 @@ body.en a span[data-lang="en"],body.en button span[data-lang="en"]{display:inlin
   const SUPABASE_KEY='sb_publishable_R9hSpCcwPVlbdhhBC6ftEQ_vxkvqRj5';
   const ALLOWED_SRC=new Set(['instagram','threads','tiktok','youtube','x']);
   const ALLOWED_ROUTE=new Set(['bio','profile','dm']);
+  const PROFILE_PATHS={
+    '/ig':['instagram','bio'],
+    '/th':['threads','bio'],
+    '/tt':['tiktok','bio'],
+    '/yt':['youtube','profile'],
+    '/x':['x','bio']
+  };
   const params=new URLSearchParams(window.location.search);
-  const rawSrc=(params.get('src')||'').toLowerCase();
-  const rawRoute=(params.get('route')||'').toLowerCase();
+  const cleanPath=(window.location.pathname.replace(/\\/+$/,'')||'/').toLowerCase();
+  const pathSource=PROFILE_PATHS[cleanPath]||null;
+  const rawSrc=(params.get('src')||pathSource?.[0]||'').toLowerCase();
+  const rawRoute=(params.get('route')||pathSource?.[1]||'').toLowerCase();
   const src=ALLOWED_SRC.has(rawSrc)?rawSrc:'direct';
   const route=ALLOWED_ROUTE.has(rawRoute)?rawRoute:'direct';
 
