@@ -4,7 +4,7 @@
     "details": [
       {
         "appID": "2H65AKMVD6.com.bai.sporai",
-        "paths": ["/open", "/open/*"]
+        "paths": ["/open", "/open/*", "/app"]
       }
     ]
   }
