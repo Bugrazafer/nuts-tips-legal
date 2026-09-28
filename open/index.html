@@ -28,6 +28,20 @@ a{display:inline-flex;min-height:48px;align-items:center;justify-content:center;
 (function(){
   const APP_STORE='https://apps.apple.com/app/id6781012939';
   const HOME='https://nutstips.com/';
+  // NUTS_WEB_FUNNEL_OPEN_V1
+  const SUPABASE_URL='https://jpgtpietuwmmkvszsvqp.supabase.co';
+  const SUPABASE_KEY='sb_publishable_R9hSpCcwPVlbdhhBC6ftEQ_vxkvqRj5';
+  const params=new URLSearchParams(window.location.search);
+  const src=(params.get('src')||'direct').toLowerCase();
+  const route=(params.get('route')||'direct').toLowerCase();
+  const sid=params.get('sid')||('s-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2));
+  function trackStore(store){
+    fetch(SUPABASE_URL+'/rest/v1/rpc/log_web_funnel_event',{
+      method:'POST',keepalive:true,
+      headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json'},
+      body:JSON.stringify({p_event_type:'store_click',p_src:src,p_route:route,p_store:store,p_session_id:sid,p_page_path:'/open'})
+    }).catch(function(){});
+  }
   const ua=navigator.userAgent || '';
   const isIOS=/iPhone|iPad|iPod/i.test(ua) || (navigator.platform==='MacIntel' && navigator.maxTouchPoints>1);
   const isAndroid=/Android/i.test(ua);
@@ -35,6 +49,7 @@ a{display:inline-flex;min-height:48px;align-items:center;justify-content:center;
   const fallback=document.getElementById('fallback');
 
   if(isIOS){
+    trackStore('apple');
     fallback.href=APP_STORE;
     fallback.textContent='App Store’da Aç';
     setTimeout(()=>window.location.replace(APP_STORE),250);
