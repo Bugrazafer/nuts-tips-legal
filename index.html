@@ -584,7 +584,7 @@ body.en a span[data-lang="en"],body.en button span[data-lang="en"]{display:inlin
     '/x':['x','bio']
   };
   const params=new URLSearchParams(window.location.search);
-  const cleanPath=(window.location.pathname.replace(/\\/+$/,'')||'/').toLowerCase();
+  const cleanPath=(window.location.pathname.replace(/\/+$/,'')||'/').toLowerCase();
   const pathSource=PROFILE_PATHS[cleanPath]||null;
   const rawSrc=(params.get('src')||pathSource?.[0]||'').toLowerCase();
   const rawRoute=(params.get('route')||pathSource?.[1]||'').toLowerCase();
