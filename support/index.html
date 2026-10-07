@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0E0F11">
+<meta name="description" content="Nuts Tips destek ve iletişim sayfası.">
+<meta property="og:title" content="Nuts Tips Support">
+<meta property="og:description" content="Nuts Tips uygulaması, üyelik ve hesap konularında destek alın.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nutstips.com/support">
+<title>Nuts Tips — Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E0F11;
+  --bg-elevated:#17191C;
+  --surface:#17191C;
+  --surface-strong:#1E2126;
+  --accent:#C9A24E;
+  --accent-soft:rgba(201,162,78,.14);
+  --text:#EEF1F5;
+  --text-secondary:#9AA3AE;
+  --text-muted:#6E7681;
+  --border:#262A30;
+  --success:#34C08A;
+  --radius-sm:8px;
+  --radius-md:16px;
+  --radius-pill:999px;
+  --shadow:0 18px 46px rgba(0,0,0,.24);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"IBM Plex Sans",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+button,a{font:inherit}
+a{color:inherit}
+.wrap{width:min(1160px,calc(100% - 32px));margin:0 auto}
+.site-header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(14,15,17,.92);
+  border-bottom:1px solid rgba(38,42,48,.72);
+  backdrop-filter:blur(14px);
+}
+.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;letter-spacing:-.35px;font-size:20px}
+.brand-mark{
+  width:31px;height:31px;border-radius:10px;display:grid;place-items:center;
+  background:var(--surface-strong);border:1px solid var(--border);color:var(--accent);
+  font-family:"IBM Plex Mono",monospace;font-size:14px;font-weight:600;
+}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.lang{
+  height:38px;padding:0 12px;border-radius:var(--radius-sm);
+  border:1px solid var(--border);background:var(--surface);color:var(--text-secondary);
+  font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;
+}
+.nav-cta,.button{
+  min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:0 17px;border-radius:var(--radius-md);text-decoration:none;
+  font-weight:700;font-size:14px;border:1px solid transparent;transition:.18s ease;
+}
+.nav-cta{min-height:38px;border-radius:10px;background:var(--accent);color:#0E0F11;padding:0 14px}
+.button.primary{background:var(--accent);color:#0E0F11}
+.button.primary:hover,.nav-cta:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.button.secondary{background:var(--surface);border-color:var(--border);color:var(--text)}
+.button.secondary:hover{border-color:#3A4049;background:var(--surface-strong)}
+main{min-height:calc(100vh - 164px)}
+.support-hero{padding:88px 0 38px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:11px;
+  font-weight:700;letter-spacing:1.25px;text-transform:uppercase;margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:20px;height:1px;background:var(--accent)}
+h1{font-size:clamp(42px,6vw,66px);line-height:1;letter-spacing:-2.4px;margin:0 0 18px}
+.lead{max-width:680px;color:var(--text-secondary);font-size:17px;line-height:1.65;margin:0}
+.support-grid{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:16px;padding:12px 0 86px;
+}
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:20px;
+  padding:24px;box-shadow:var(--shadow);
+}
+.card-kicker{
+  color:var(--text-muted);font-family:"IBM Plex Mono",monospace;font-size:10px;
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;
+}
+.card h2{font-size:24px;letter-spacing:-.7px;margin:0 0 10px}
+.card p{color:var(--text-secondary);font-size:14px;line-height:1.65;margin:0}
+.email{
+  display:inline-block;margin-top:18px;color:var(--accent);text-decoration:none;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;
+}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.link-list{display:grid;gap:1px;margin-top:16px;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.link-list a{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 15px;
+  background:var(--surface-strong);text-decoration:none;color:var(--text-secondary);font-size:13px;
+}
+.link-list a:hover{color:var(--text);background:#22262B}
+.link-list span:last-child{color:var(--accent);font-family:"IBM Plex Mono",monospace}
+footer{border-top:1px solid var(--border);padding:28px 0 38px;color:var(--text-muted);font-size:11px}
+.footer-row{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+.disclaimer{max-width:660px;line-height:1.55}
+.links{display:flex;flex-wrap:wrap;gap:14px;justify-content:flex-end}
+.links a{color:var(--text-secondary);text-decoration:none}
+.links a:hover{color:var(--text)}
+[data-lang="en"]{display:none}
+body.en [data-lang="tr"]{display:none}
+body.en [data-lang="en"]{display:initial}
+body.en div[data-lang="en"],body.en p[data-lang="en"],body.en h1[data-lang="en"],body.en h2[data-lang="en"],body.en span[data-lang="en"]{display:block}
+body.en a span[data-lang="en"],body.en button span[data-lang="en"]{display:inline}
+@media(max-width:780px){
+  .support-hero{padding:64px 0 30px}
+  .support-grid{grid-template-columns:1fr;padding-bottom:58px}
+}
+@media(max-width:640px){
+  .wrap{width:min(100% - 32px,1160px)}
+  .nav{height:62px}
+  .nav-cta{display:none}
+  h1{font-size:43px;letter-spacing:-1.8px}
+  .lead{font-size:16px}
+  .card{padding:19px}
+  .actions{display:grid;grid-template-columns:1fr}
+  .button{width:100%}
+  .footer-row{flex-direction:column}
+  .links{justify-content:flex-start}
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="/" aria-label="Nuts Tips home">
+      <span class="brand-mark">NT</span>
+      <span>Nuts Tips</span>
+    </a>
+    <div class="nav-actions">
+      <button class="lang" id="langBtn" type="button" aria-label="Change language">EN</button>
+      <a class="nav-cta" href="/open">
+        <span data-lang="tr">Uygulamayı Aç</span>
+        <span data-lang="en">Open App</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="support-hero">
+    <div class="wrap">
+      <div class="eyebrow" data-lang="tr">Destek</div>
+      <div class="eyebrow" data-lang="en">Support</div>
+      <h1 data-lang="tr">Nasıl yardımcı olabiliriz?</h1>
+      <h1 data-lang="en">How can we help?</h1>
+      <p class="lead" data-lang="tr">Uygulama, Pro üyelik veya hesabınla ilgili bir konuda yardıma ihtiyacın varsa bize e-posta gönderebilirsin.</p>
+      <p class="lead" data-lang="en">If you need help with the app, your Pro membership, or your account, you can reach us by email.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap support-grid">
+      <article class="card">
+        <div class="card-kicker" data-lang="tr">İletişim</div>
+        <div class="card-kicker" data-lang="en">Contact</div>
+        <h2 data-lang="tr">Nuts Tips Support</h2>
+        <h2 data-lang="en">Nuts Tips Support</h2>
+        <p data-lang="tr">Sorununu mümkün olduğunca kısa ve açık şekilde yaz. Gerekliyse kullandığın cihazı ve karşılaştığın ekranı da belirt.</p>
+        <p data-lang="en">Describe the issue as clearly as possible. If relevant, include your device and the screen where you encountered the problem.</p>
+        <a class="email" href="mailto:bugra@nutstips.com">bugra@nutstips.com</a>
+        <div class="actions">
+          <a class="button primary" href="mailto:bugra@nutstips.com">
+            <span data-lang="tr">E-posta Gönder →</span>
+            <span data-lang="en">Send Email →</span>
+          </a>
+          <a class="button secondary" href="/">
+            <span data-lang="tr">Ana Sayfa</span>
+            <span data-lang="en">Home</span>
+          </a>
+        </div>
+      </article>
+
+      <aside class="card">
+        <div class="card-kicker" data-lang="tr">Yardımcı bağlantılar</div>
+        <div class="card-kicker" data-lang="en">Helpful links</div>
+        <h2 data-lang="tr">Hesap ve yasal bilgiler</h2>
+        <h2 data-lang="en">Account & legal</h2>
+        <p data-lang="tr">Gizlilik, kullanım koşulları veya hesap silme işlemleri için aşağıdaki sayfaları kullanabilirsin.</p>
+        <p data-lang="en">Use the pages below for privacy, terms, or account deletion information.</p>
+        <div class="link-list">
+          <a href="/privacy.html"><span>Privacy</span><span>→</span></a>
+          <a href="/terms.html"><span>Terms</span><span>→</span></a>
+          <a href="/delete-account.html"><span>Delete account</span><span>→</span></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="disclaimer">
+      <span data-lang="tr">Nuts Tips yalnızca eğlence ve bilgilendirme amaçlı istatistiksel analiz sunar. Bahis oynatmaz veya bahis kabul etmez. 18+</span>
+      <span data-lang="en">Nuts Tips provides statistical analysis for entertainment and informational purposes only. It does not accept or facilitate wagers. 18+</span>
+    </div>
+    <div class="links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="/delete-account.html">Delete account</a>
+      <a href="/support">Support</a>
+      <a href="https://www.instagram.com/nutstipsapp/" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const button=document.getElementById('langBtn');
+  const stored=localStorage.getItem('nutsTipsLang');
+  if(stored==='en'){
+    document.body.classList.add('en');
+    button.textContent='TR';
+    document.documentElement.lang='en';
+  }
+  button.addEventListener('click',function(){
+    const isEn=document.body.classList.toggle('en');
+    button.textContent=isEn?'TR':'EN';
+    document.documentElement.lang=isEn?'en':'tr';
+    localStorage.setItem('nutsTipsLang',isEn?'en':'tr');
+  });
+})();
+</script>
+</body>
+</html>
