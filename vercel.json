@@ -37,6 +37,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/dm",
+      "destination": "/index.html"
+    },
+    {
       "source": "/x",
       "destination": "/index.html"
     }
