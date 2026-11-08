@@ -19,6 +19,18 @@
       ]
     }
   ],
+  "redirects": [
+    {
+      "source": "/tg",
+      "destination": "https://t.me/nutstips",
+      "permanent": false
+    },
+    {
+      "source": "/app",
+      "destination": "https://apps.apple.com/app/id6781012939",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/ig",
